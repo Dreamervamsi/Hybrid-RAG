@@ -5,8 +5,11 @@ from pypdf import PdfReader
 def file_loader(file_path:str)->dict:
     
     if not os.path.exists(file_path):
-        return None
-    
+        raise FileNotFoundError('File not found')
+    # {
+    #         'status':'Error',
+    #         'message':'File doesnt exist'
+    #     }
     doc_content=[]
 
     if file_path.lower().endswith('.pdf'):
@@ -23,7 +26,7 @@ def file_loader(file_path:str)->dict:
         with open(file_path,"r",encoding='utf-8') as fp:
             extracted_content=fp.read()
     else:
-        return None
+        raise ValueError('unsupported file path')
     
     
     return {
