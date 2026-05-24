@@ -2,7 +2,7 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 from . import config
 import uuid
 
-def chunk_text(res:dict)->list:
+def chunk_text(res:dict) -> list:
     text_splitter = RecursiveCharacterTextSplitter(
         chunk_size = config.CHUNK_SIZE,
         chunk_overlap=config.CHUNK_OVERLAP,

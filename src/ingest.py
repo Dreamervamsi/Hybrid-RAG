@@ -1,7 +1,7 @@
 import argparse
 from .loaders import file_loader
 from .chunking import chunk_text
-import chunking
+from .embeddings import embed_text
 
 def main():
     parser=argparse.ArgumentParser(
@@ -17,15 +17,22 @@ def main():
     args = parser.parse_args()
 
     try:
+        # retriving text from document
         loader_res = file_loader(args.file)
 
-        content_chunks = chunking(loader_res)
+        # chunking
+        data_chunks = chunk_text(loader_res)
 
-        if not content_chunks:
+        if not data_chunks:
             print("Cant extract the text")
-            return
-            
-        print(content_chunks)
+            return {
+                'message':'cant extract the text from given document'
+            }
+
+        # embeddings
+        embeddings = embed_text(data_chunks[0]['text'])
+        
+
     except FileNotFoundError as e:
         print(e)
         raise SystemExit(1)
