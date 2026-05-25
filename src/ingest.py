@@ -1,7 +1,7 @@
 import argparse
 from .loaders import file_loader
 from .chunking import chunk_text
-from .embeddings import embed_text
+from .index_dense import vector_store
 
 def main():
     parser=argparse.ArgumentParser(
@@ -28,10 +28,8 @@ def main():
             return {
                 'message':'cant extract the text from given document'
             }
-
-        # embeddings
-        embeddings = embed_text(data_chunks[0]['text'])
         
+        collection = vector_store(data_chunks)
 
     except FileNotFoundError as e:
         print(e)

@@ -23,4 +23,3 @@ def chunk_text(res:dict) -> list:
             }
         })
     return text_chunks
-        
