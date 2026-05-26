@@ -15,10 +15,10 @@ def chunk_text(res:dict) -> list:
     for idx,txt in enumerate(raw_chunks):
         text_chunks.append({
                 "chunk_id": str(uuid.uuid4()),
-                "doc_id": str(res["id"]),
                 "text": txt,
                 "metadata": {
                     "source": res["source_path"],
+                    "doc_id": str(res["id"]),
                     "chunk_index": idx
             }
         })

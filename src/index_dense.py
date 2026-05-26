@@ -1,23 +1,40 @@
 import chromadb
-from .embeddings import embed_text
 from . import config
+import os
 
-def vector_store(chunks:list,full_reingest:bool=False):
+def get_client():
+    client = chromadb.PersistentClient(path=os.path.join(config.INDEX_DIR,"chroma"))
+    return client 
+
+def get_collection(full_reingest:bool=False):
+    client = get_client()
+    if full_reingest:
+        try:
+            client.delete_collection(name=config.CHROMADB_COLLECTION)
+            print(f"Cleared existing collection: {config.INDEX_DIR}")
+        except ValueError:
+            pass
+
+    collection = client.get_or_create_collection(
+        name=config.CHROMADB_COLLECTION,
+        embedding_function=None,
+        metadata={"hnsw:space": "cosine"}
+    )
+
+    return collection
+
+def vector_store(chunks:list,embeddings:list,full_reingest:bool=False):
     
-    client = chromadb.Client()
-    collection = client.get_or_create_collection(name=config.INDEX_DIR,embedding_function=None)
-
     documents=[]
     ids=[]
     metadatas=[]
-    embeddings = []
+    
+    collection = get_collection(full_reingest)
 
-        
     for chunk in chunks:
         documents.append(chunk['text'])
         ids.append(chunk['chunk_id'])
         metadatas.append(chunk['metadata'])
-        embeddings.append(embed_text(chunks['text']))
     
     collection.upsert(
         documents=documents,
@@ -29,3 +46,23 @@ def vector_store(chunks:list,full_reingest:bool=False):
     return collection
 
 
+def search(query_embedding, top_k) -> list:
+
+    collection = get_collection(False)
+    
+    results = collection.query(
+        query_embeddings=[query_embedding],
+        n_results=top_k
+    )
+
+    formatted_results = []
+
+    for i in range(len(results['ids'][0])):
+        formatted_results.append({
+            'chunk_id':results['ids'][0][i],
+            'text':results['documents'][0][i],
+            'metadata':results['metadatas'][0][i],
+            'score':results['distances'][0][i]
+        })
+    
+    return formatted_results
