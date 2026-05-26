@@ -3,7 +3,7 @@ from .loaders import file_loader
 from .chunking import chunk_text
 from .index_dense import vector_store
 from .embeddings import dense_embed
-from .sparse_index import tokenize
+from .sparse_index import Tokenize
 
 def main():
     parser=argparse.ArgumentParser(
@@ -37,7 +37,8 @@ def main():
         collection = vector_store(data_chunks,embeddings,full_reingest=False)
 
         # sparse search
-        tokens = tokenize(data_chunks)
+        token = Tokenize(data_chunks)
+        print(token.sparse_search(query="of",top_k=1))
 
     except FileNotFoundError as e:
         print(e)
@@ -45,6 +46,7 @@ def main():
     except ValueError as e:
         print(e)
         raise SystemExit(1)
+
 
 if __name__ == '__main__':
     main()
