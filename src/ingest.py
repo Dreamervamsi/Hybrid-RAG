@@ -1,9 +1,10 @@
 import argparse
-from .loaders import file_loader
-from .chunking import chunk_text
-from .index_dense import vector_store
-from .embeddings import dense_embed
-from .sparse_index import Tokenize
+from src.loaders import file_loader
+from src.chunking import chunk_text
+from src.index_dense import vector_store
+from src.embeddings import dense_embed
+from src.sparse_index import Tokenize
+from src import config
 
 def main():
     parser=argparse.ArgumentParser(
@@ -14,6 +15,11 @@ def main():
         type=str,
         required=True,
         help="Used for ingesting docs"
+    )
+    parser.add_argument(
+        "--reingest",
+        type=bool,
+        help="Used for full reingesting docs.(By default True)"
     )
 
     args = parser.parse_args()
@@ -31,14 +37,13 @@ def main():
                 'message':'cant extract the text from given document'
             }
 
-        # dense search
         embeddings = dense_embed(data_chunks)
 
-        collection = vector_store(data_chunks,embeddings,full_reingest=False)
+        collection = vector_store(data_chunks,embeddings,full_reingest=getattr(args,'reingest',True))
 
-        # sparse search
-        token = Tokenize(data_chunks)
-        print(token.sparse_search(query="of",top_k=1))
+        tokenize = Tokenize(data_chunks)
+
+        tokenize.save_chunks(data_chunks,config.CHUNK_FILE,full_reingest=getattr(args,'reingest',True))
 
     except FileNotFoundError as e:
         print(e)
