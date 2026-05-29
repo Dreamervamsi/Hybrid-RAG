@@ -2,6 +2,10 @@ from rank_bm25 import BM25Okapi
 import os,json
 
 class Tokenize:
+    def __init__(self):
+        self.org_chunks = [] 
+        self.tokenize_corpus = None
+
     def init_chunks(self,chunks:list):
         if not chunks:
             raise ValueError('Text chunks not provided')
@@ -14,22 +18,33 @@ class Tokenize:
         if not self.org_chunks:
             self.corpus = []
             self.tokenize_corpus = None
+            return
 
         self.corpus=[self.org_chunks[i]['text'].lower().split() for i in range(len(self.org_chunks))]
     
         self.tokenize_corpus = BM25Okapi(self.corpus)
 
-    def sparse_search(self,query:str,top_k):
+    def sparse_search(self,query:str):
     
         tokenized_query = query.lower().split()
 
-        res = self.tokenize_corpus.get_top_n(tokenized_query,self.org_chunks,n=top_k)
+        scores = self.tokenize_corpus.get_scores(tokenized_query)
+        
+        scored_chunks = []
+        for idx, chunk in enumerate(self.org_chunks):
+            scored_chunks.append({
+                "chunk_id": chunk.get("chunk_id"),
+                "text": chunk.get("text"),
+                "metadata": chunk.get("metadata"),
+                "sparse_score": float(scores[idx]) # Keep the raw score
+            }) 
 
-        return res
+        scored_chunks.sort(key=lambda x:x['sparse_score'],reverse=True)
+        return scored_chunks
     
     def save_chunks(self,chunks:list,file_path:str,full_reingest:bool):
            
-        if full_reingest or os.path.exists(file_path): # if chunk.json not exists it will just create empty list
+        if full_reingest or not os.path.exists(file_path): # if chunk.json not exists it will just create empty list
             existing_chunks=[]
         else:  # if chunk.json exists it will read contents of chunk.json and place it into existing_chunks list
             try:
@@ -47,14 +62,14 @@ class Tokenize:
         with open(file_path,"w",encoding="utf-8") as f:
             json.dump(existing_chunks,f,indent=4)  # it takes input as python object[dist,dict,etc..] and write the contents into .json file
 
-        self.org_chunks = chunks
+        self.org_chunks = existing_chunks
         self.build_index()
     
     def load_chunks(self,file_path:str):
         if not os.path.exists(file_path):
             raise FileNotFoundError("File not exists")
 
-        with open(file_path,"r") as f:
+        with open(file_path,"r",encoding="utf-8") as f:
             self.org_chunks = json.load(f)
         
         self.build_index()

@@ -17,17 +17,19 @@ def main():
         help="Used for ingesting docs"
     )
     parser.add_argument(
-        "--reingest",
-        type=bool,
-        help="Used for full reingesting docs.(By default True)"
+        "--no-reingest",
+        dest="reingest",
+        action="store_false",
+        help="Append data instead of performing a full re-ingestion wipe."
     )
 
     args = parser.parse_args()
 
     try:
+        print("File loading.Extracting text..")
         # retriving text from document
         loader_res = file_loader(args.file)
-
+        print("Chunking the file..")
         # chunking
         data_chunks = chunk_text(loader_res)
 
@@ -36,15 +38,18 @@ def main():
             return {
                 'message':'cant extract the text from given document'
             }
-
+        print("Embedding the file chunks....")
         embeddings = dense_embed(data_chunks)
 
-        collection = vector_store(data_chunks,embeddings,full_reingest=getattr(args,'reingest',True))
+        collection = vector_store(data_chunks,embeddings,full_reingest=args.reingest)
 
         tokenize = Tokenize()
         tokenize.init_chunks(data_chunks)
 
-        tokenize.save_chunks(data_chunks,config.CHUNK_FILE,full_reingest=getattr(args,'reingest',True))
+        print("Saving chunks..")
+        tokenize.save_chunks(data_chunks,config.CHUNK_FILE,full_reingest=args.reingest)
+
+        print("Ingestion successful!, Full reingestion applied: ",args.reingest)
 
     except FileNotFoundError as e:
         print(e)

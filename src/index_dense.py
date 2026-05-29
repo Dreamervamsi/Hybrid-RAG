@@ -62,7 +62,7 @@ def dense_search(query_embedding, top_k) -> list:
             'chunk_id':results['ids'][0][i],
             'text':results['documents'][0][i],
             'metadata':results['metadatas'][0][i],
-            'score':results['distances'][0][i]
+            'score':float(results['distances'][0][i])
         })
     
     return formatted_results
