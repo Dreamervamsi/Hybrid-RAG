@@ -41,7 +41,8 @@ def main():
 
         collection = vector_store(data_chunks,embeddings,full_reingest=getattr(args,'reingest',True))
 
-        tokenize = Tokenize(data_chunks)
+        tokenize = Tokenize()
+        tokenize.init_chunks(data_chunks)
 
         tokenize.save_chunks(data_chunks,config.CHUNK_FILE,full_reingest=getattr(args,'reingest',True))
 

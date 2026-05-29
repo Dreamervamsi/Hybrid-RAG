@@ -46,7 +46,7 @@ def vector_store(chunks:list,embeddings:list,full_reingest:bool=False):
     return collection
 
 
-def search(query_embedding, top_k) -> list:
+def dense_search(query_embedding, top_k) -> list:
 
     collection = get_collection(False)
     

@@ -2,7 +2,7 @@ from rank_bm25 import BM25Okapi
 import os,json
 
 class Tokenize:
-    def __init__(self,chunks:list):
+    def init_chunks(self,chunks:list):
         if not chunks:
             raise ValueError('Text chunks not provided')
 
@@ -34,18 +34,18 @@ class Tokenize:
         else:  # if chunk.json exists it will read contents of chunk.json and place it into existing_chunks list
             try:
                 with open(file_path,"r",encoding="utf-8") as f:
-                    exisiting_chunks=json.load(f) # json.load is a method used to read and parse incoming file
+                    existing_chunks=json.load(f) # json.load is a method used to read and parse incoming file
             except (json.JSONDecodeError, FileNotFoundError):
-                exisiting_chunks=[]
+                existing_chunks=[]
 
         existing_ids={chunk.get('chunk_id') for chunk in existing_chunks if chunk.get('chunk_id')}
 
         for chunk in chunks:
             if chunk['chunk_id'] and chunk['chunk_id'] not in existing_ids:
-                exisiting_chunks.append(chunk)
+                existing_chunks.append(chunk)
 
         with open(file_path,"w",encoding="utf-8") as f:
-            json.dump(exisiting_chunks,f,indent=4)  # it takes input as python object[dist,dict,etc..] and write the contents into .json file
+            json.dump(existing_chunks,f,indent=4)  # it takes input as python object[dist,dict,etc..] and write the contents into .json file
 
         self.org_chunks = chunks
         self.build_index()
