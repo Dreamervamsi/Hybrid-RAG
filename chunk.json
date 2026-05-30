@@ -1,100 +1,100 @@
 [
     {
-        "chunk_id": "05331e20-ae25-4025-8e3b-90bcc892a104",
+        "chunk_id": "4df190ef-0e80-44d1-a508-bcc2ef6b1241",
         "text": "Dinosaurs are a diverse group of warmblooded reptiles[note 1] of the clade Dinosauria. They existed through most of the Mesozoic era, first appearing early in the Triassic period. They became the dominant terrestrial vertebrates after the Triassic\u2013Jurassic extinction event 201.3 mya and their dominance continued throughout the Jurassic and Cretaceous periods. The fossil record shows that birds are",
         "metadata": {
             "source": "tests/test.txt",
-            "doc_id": "01a59e19-6cde-4439-ba56-cf3c98d4d811",
+            "doc_id": "64c5c356-cd8f-42fa-9931-12cb1f5ede89",
             "chunk_index": 0
         }
     },
     {
-        "chunk_id": "dd0d968f-b95f-4234-81b8-51b0d5444193",
+        "chunk_id": "f703e668-c073-461d-a583-6e0baa19c23a",
         "text": "continued throughout the Jurassic and Cretaceous periods. The fossil record shows that birds are feathered dinosaurs, having evolved from earlier theropods during the Late Jurassic epoch, and are the only dinosaur lineage known to have survived the Cretaceous\u2013Paleogene extinction event approximately 66 mya. Dinosaurs can therefore be divided into avian dinosaurs\u2014birds\u2014and the extinct non-avian",
         "metadata": {
             "source": "tests/test.txt",
-            "doc_id": "01a59e19-6cde-4439-ba56-cf3c98d4d811",
+            "doc_id": "64c5c356-cd8f-42fa-9931-12cb1f5ede89",
             "chunk_index": 1
         }
     },
     {
-        "chunk_id": "ff476ab5-bc8f-4f50-bc65-bb5a6631d6d5",
+        "chunk_id": "78228fe7-ff2a-4c7b-acac-2fa8c8092821",
         "text": "66 mya. Dinosaurs can therefore be divided into avian dinosaurs\u2014birds\u2014and the extinct non-avian dinosaurs, which are all dinosaurs other than birds.",
         "metadata": {
             "source": "tests/test.txt",
-            "doc_id": "01a59e19-6cde-4439-ba56-cf3c98d4d811",
+            "doc_id": "64c5c356-cd8f-42fa-9931-12cb1f5ede89",
             "chunk_index": 2
         }
     },
     {
-        "chunk_id": "91ae91fe-3371-43f9-9f29-82ec00548fac",
+        "chunk_id": "18efdc4f-fa62-4556-9608-01baac06e67a",
         "text": "Dinosaurs are varied from taxonomic, morphological and ecological standpoints. Birds, at over 11,000 living species, are among the most diverse groups of vertebrates. Using fossil evidence, paleontologists have identified over 900 distinct genera and more than 1,000 different species of non-avian dinosaurs. Dinosaurs are represented on every continent by both extant species (birds) and fossil",
         "metadata": {
             "source": "tests/test.txt",
-            "doc_id": "01a59e19-6cde-4439-ba56-cf3c98d4d811",
+            "doc_id": "64c5c356-cd8f-42fa-9931-12cb1f5ede89",
             "chunk_index": 3
         }
     },
     {
-        "chunk_id": "f5bad224-bb88-4f49-99c5-42f539819ec8",
+        "chunk_id": "0ab037da-d5ae-48c4-b6e8-01b9de6228a4",
         "text": "dinosaurs. Dinosaurs are represented on every continent by both extant species (birds) and fossil remains. Through most of the 20th century, before birds were recognized as dinosaurs, most of the scientific community believed dinosaurs to have been sluggish and cold-blooded. Most research conducted since the 1970s, however, has indicated that dinosaurs were active animals with elevated",
         "metadata": {
             "source": "tests/test.txt",
-            "doc_id": "01a59e19-6cde-4439-ba56-cf3c98d4d811",
+            "doc_id": "64c5c356-cd8f-42fa-9931-12cb1f5ede89",
             "chunk_index": 4
         }
     },
     {
-        "chunk_id": "c778d524-96d6-48f2-a3b3-c7499aaa0b71",
+        "chunk_id": "cca83c29-ab69-4df4-b368-4d3d481f4d8f",
         "text": "conducted since the 1970s, however, has indicated that dinosaurs were active animals with elevated metabolisms and numerous adaptations for social interaction.",
         "metadata": {
             "source": "tests/test.txt",
-            "doc_id": "01a59e19-6cde-4439-ba56-cf3c98d4d811",
+            "doc_id": "64c5c356-cd8f-42fa-9931-12cb1f5ede89",
             "chunk_index": 5
         }
     },
     {
-        "chunk_id": "bb178be5-c9c5-4e02-96c6-5b8f9446bcff",
+        "chunk_id": "99ce79e2-445f-4655-8d93-a959eb3512e3",
         "text": "Evidence shows that all dinosaurs had erect legs similar to that of birds and many mammals, than the sprawling leg stance of cold-blooded tetrapods. Some were herbivorous, others carnivorous. Evidence suggests that all dinosaurs were egg-laying, and that nest-building was a trait shared by many dinosaurs, both avian and non-avian.",
         "metadata": {
             "source": "tests/test.txt",
-            "doc_id": "01a59e19-6cde-4439-ba56-cf3c98d4d811",
+            "doc_id": "64c5c356-cd8f-42fa-9931-12cb1f5ede89",
             "chunk_index": 6
         }
     },
     {
-        "chunk_id": "eabbc7b5-33ed-40ee-b08e-c4a3f2a9fb8f",
+        "chunk_id": "a4afa437-ca6f-49e6-bd7a-fc9275e2c61c",
         "text": "While dinosaurs were ancestrally bipedal, many extinct groups included quadrupedal species, and some were able to shift between these stances. \nElaborate display structures such as horns or crests are common to all dinosaur groups, and some extinct groups developed skeletal modifications",
         "metadata": {
             "source": "tests/test.txt",
-            "doc_id": "01a59e19-6cde-4439-ba56-cf3c98d4d811",
+            "doc_id": "64c5c356-cd8f-42fa-9931-12cb1f5ede89",
             "chunk_index": 7
         }
     },
     {
-        "chunk_id": "69d2fa95-c3d7-477e-8cf0-f3b3a8d4e9af",
+        "chunk_id": "db867bc4-c73a-459e-a728-404069b2affd",
         "text": "such as bony armor and spines. While the dinosaurs' modern-day surviving avian lineage (birds) are generally small due to the constraints of flight, many non-avian dinosaurs were large-bodied\u2014the largest sauropod dinosaurs are estimated to have reached lengths of 39.7 meters (130 feet) and heights of 18 m (59 ft) and were the largest land animals of all time.",
         "metadata": {
             "source": "tests/test.txt",
-            "doc_id": "01a59e19-6cde-4439-ba56-cf3c98d4d811",
+            "doc_id": "64c5c356-cd8f-42fa-9931-12cb1f5ede89",
             "chunk_index": 8
         }
     },
     {
-        "chunk_id": "b5ae309f-2559-4e9a-9824-25c3fec4d148",
+        "chunk_id": "abe1c198-30ef-43ae-a079-c7653213cdea",
         "text": "Under phylogenetic nomenclature, dinosaurs are usually defined as the group consisting of the most recent common ancestor (MRCA) of Triceratops and modern birds (Neornithes), and all its descendants.[7] It has also been suggested that Dinosauria be defined with respect to the MRCA of Megalosaurus and Iguanodon, because these were two of the three genera cited by",
         "metadata": {
             "source": "tests/test.txt",
-            "doc_id": "01a59e19-6cde-4439-ba56-cf3c98d4d811",
+            "doc_id": "64c5c356-cd8f-42fa-9931-12cb1f5ede89",
             "chunk_index": 9
         }
     },
     {
-        "chunk_id": "0cc21c31-8ac5-412b-a1b2-b056b674c671",
+        "chunk_id": "54d4bbd4-4289-471b-ad4e-13e806657ea5",
         "text": "Richard Owen when he recognized the Dinosauria",
         "metadata": {
             "source": "tests/test.txt",
-            "doc_id": "01a59e19-6cde-4439-ba56-cf3c98d4d811",
+            "doc_id": "64c5c356-cd8f-42fa-9931-12cb1f5ede89",
             "chunk_index": 10
         }
     }
