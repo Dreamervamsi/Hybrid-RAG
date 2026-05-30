@@ -44,11 +44,11 @@ def ingest(file_paths:list,reingest:bool=True):
 
         collection = vector_store(data_chunks,embeddings,full_reingest=reingest)
 
-        # tokenize = Tokenize()
-        # tokenize.init_chunks(data_chunks)
+        tokenize = Tokenize()
+        tokenize.init_chunks(data_chunks)
 
-        # print("Saving chunks..")
-        # tokenize.save_chunks(data_chunks,config.CHUNK_FILE,full_reingest=reingest)
+        print("Saving chunks..")
+        tokenize.save_chunks(data_chunks,config.CHUNK_FILE,full_reingest=reingest)
 
         print("Ingestion successful!, Full reingestion applied: ",reingest)
 

@@ -5,6 +5,7 @@ from pypdf import PdfReader
 def file_loader(file_paths:list)->list:
     results = []
     for file_path in file_paths:
+        
         if not os.path.exists(file_path):
             raise FileNotFoundError('File not found')
         doc_content=[]
