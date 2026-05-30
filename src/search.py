@@ -5,7 +5,7 @@ from src.index_dense import dense_search
 from src.embeddings import model
 from src.rrf_ranking import reciprocal_rank_fusion
 
-def main():
+def search():
     parser = argparse.ArgumentParser(
         description="quering the files"
     )
@@ -17,11 +17,11 @@ def main():
         help="Used for providing query"
     )
 
-    # parser.add_argument(
-    #     '--top-k',
-    #     type = int,
-    #     help="Used for retriving top-k results (default k=3)"
-    # )
+    parser.add_argument(
+        '--top-k',
+        type = int,
+        help="Used for retriving top-k results (default k=3)"
+    )
 
     args = parser.parse_args()
 
@@ -30,7 +30,7 @@ def main():
         # sparse search
         tokenizer = Tokenize()
         tokenizer.load_chunks(file_path=config.CHUNK_FILE)
-        sparse_results = tokenizer.sparse_search(query)
+        sparse_results = tokenizer.sparse_search(query,getattr(args,'top_k',config.TOP_K))
         # for idx, match in enumerate(sparse_results, start=1):
         #     print(f"\n[Result {idx}]")
         #     print(match.get('text', 'No text field found'))
@@ -48,6 +48,3 @@ def main():
     except Exception as e:
         # Left open as requested, but added a basic pass/print to avoid compilation crash
         print(f"An error occurred: {e}")
-
-if __name__ == '__main__':
-    main()

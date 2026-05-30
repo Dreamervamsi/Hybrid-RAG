@@ -32,18 +32,19 @@ def vector_store(chunks:list,embeddings:list,full_reingest:bool=False):
     collection = get_collection(full_reingest)
 
     for chunk in chunks:
-        documents.append(chunk['text'])
-        ids.append(chunk['chunk_id'])
-        metadatas.append(chunk['metadata'])
+        print(chunk)
+    #     documents.append(chunk['text'])
+    #     ids.append(chunk['chunk_id'])
+    #     metadatas.append(chunk['metadata'])
     
-    collection.upsert(
-        documents=documents,
-        ids=ids,
-        metadatas=metadatas,
-        embeddings=embeddings
-    )
+    # collection.upsert(
+    #     documents=documents,
+    #     ids=ids,
+    #     metadatas=metadatas,
+    #     embeddings=embeddings
+    # )
 
-    return collection
+    # return collection
 
 
 def dense_search(query_embedding, top_k) -> list:
@@ -62,7 +63,7 @@ def dense_search(query_embedding, top_k) -> list:
             'chunk_id':results['ids'][0][i],
             'text':results['documents'][0][i],
             'metadata':results['metadatas'][0][i],
-            'score':float(results['distances'][0][i])
+            'distance':float(results['distances'][0][i])
         })
     
     return formatted_results

@@ -6,29 +6,29 @@ from src.embeddings import dense_embed
 from src.sparse_index import Tokenize
 from src import config
 
-def main():
-    parser=argparse.ArgumentParser(
-        description="Ingesting documents through CLI"
-    )
-    parser.add_argument(
-        "--file",
-        type=str,
-        required=True,
-        help="Used for ingesting docs"
-    )
-    parser.add_argument(
-        "--no-reingest",
-        dest="reingest",
-        action="store_false",
-        help="Append data instead of performing a full re-ingestion wipe."
-    )
+def ingest(file_paths:list,reingest:bool=True):
+    # parser=argparse.ArgumentParser(
+    #     description="Ingesting documents through CLI"
+    # )
+    # parser.add_argument(
+    #     "--file",
+    #     type=str,
+    #     required=True,
+    #     help="Used for ingesting docs"
+    # )
+    # parser.add_argument(
+    #     "--no-reingest",
+    #     dest="reingest",
+    #     action="store_false",
+    #     help="Append data instead of performing a full re-ingestion wipe."
+    # )
 
-    args = parser.parse_args()
+    # args = parser.parse_args()
 
     try:
         print("File loading.Extracting text..")
         # retriving text from document
-        loader_res = file_loader(args.file)
+        loader_res = file_loader(file_paths)
         print("Chunking the file..")
         # chunking
         data_chunks = chunk_text(loader_res)
@@ -38,18 +38,19 @@ def main():
             return {
                 'message':'cant extract the text from given document'
             }
+
         print("Embedding the file chunks....")
         embeddings = dense_embed(data_chunks)
 
-        collection = vector_store(data_chunks,embeddings,full_reingest=args.reingest)
+        collection = vector_store(data_chunks,embeddings,full_reingest=reingest)
 
-        tokenize = Tokenize()
-        tokenize.init_chunks(data_chunks)
+        # tokenize = Tokenize()
+        # tokenize.init_chunks(data_chunks)
 
-        print("Saving chunks..")
-        tokenize.save_chunks(data_chunks,config.CHUNK_FILE,full_reingest=args.reingest)
+        # print("Saving chunks..")
+        # tokenize.save_chunks(data_chunks,config.CHUNK_FILE,full_reingest=reingest)
 
-        print("Ingestion successful!, Full reingestion applied: ",args.reingest)
+        print("Ingestion successful!, Full reingestion applied: ",reingest)
 
     except FileNotFoundError as e:
         print(e)
@@ -57,7 +58,3 @@ def main():
     except ValueError as e:
         print(e)
         raise SystemExit(1)
-
-
-if __name__ == '__main__':
-    main()

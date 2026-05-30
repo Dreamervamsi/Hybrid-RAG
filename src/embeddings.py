@@ -8,7 +8,8 @@ def dense_embed(chunks:list) -> list:
 
     text = [chunk['text'] for chunk in chunks]
 
-    embeddings = list(model.embed(text))
+    # batch_size will process only 32 (since we have set) chunks at a time to avoid RAM overloading when there are thousands of chunks.
+    embeddings = list(model.embed(text,batch_size=config.get("BATCH_SIZE", 32)))
 
     return embeddings
 

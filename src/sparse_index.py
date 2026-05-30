@@ -24,7 +24,7 @@ class Tokenize:
     
         self.tokenize_corpus = BM25Okapi(self.corpus)
 
-    def sparse_search(self,query:str):
+    def sparse_search(self,query:str,top_k:int=3):
     
         tokenized_query = query.lower().split()
 
@@ -40,7 +40,8 @@ class Tokenize:
             }) 
 
         scored_chunks.sort(key=lambda x:x['sparse_score'],reverse=True)
-        return scored_chunks
+        
+        return scored_chunks[:top_k]
     
     def save_chunks(self,chunks:list,file_path:str,full_reingest:bool):
            

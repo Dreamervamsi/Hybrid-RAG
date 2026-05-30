@@ -11,7 +11,6 @@ def reciprocal_rank_fusion(sparse_res:list,dense_res:list,k:int=60):
         
         # RRF calculation / formula
         rrf_scores[doc_id] += 1.0 / (k+i)
-    
     for i,match in enumerate(dense_res):
         doc_id = match.get('chunk_id')
 

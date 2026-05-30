@@ -1,7 +1,7 @@
 CHUNK_OVERLAP=100
 CHUNK_SIZE=400
 CHUNK_FILE='chunk.json'
-TOP_K=10
+TOP_K=3
 INDEX_DIR='./vector_store'
 EMBED_MODEL = "BAAI/bge-small-en-v1.5"
 CHROMADB_COLLECTION="Hybrid_RAG_collection"
