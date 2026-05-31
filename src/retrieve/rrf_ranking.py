@@ -17,7 +17,7 @@ def reciprocal_rank_fusion(sparse_res:list,dense_res:list,k:int=60):
         if doc_id not in rrf_scores:
             rrf_scores[doc_id] = 0.0
             doc_data[doc_id] = match
-        
+            
         rrf_scores[doc_id] += 1.0 /(k+i)
 
     sorted_docs = sorted(rrf_scores.items(),key=lambda x:x[1], reverse=True)

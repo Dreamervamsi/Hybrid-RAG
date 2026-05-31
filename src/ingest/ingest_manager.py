@@ -1,30 +1,11 @@
-import argparse
-from src.loaders import file_loader
-from src.chunking import chunk_text
-from src.index_dense import vector_store
-from src.embeddings import dense_embed
-from src.sparse_index import Tokenize
+from ingest.loaders import file_loader
+from ingest.chunking import chunk_text
+from index.index_dense import vector_store
+from ingest.embeddings import dense_embed
+from index.sparse_index import Tokenize
 from src import config
 
 def ingest(file_paths:list,reingest:bool=True):
-    # parser=argparse.ArgumentParser(
-    #     description="Ingesting documents through CLI"
-    # )
-    # parser.add_argument(
-    #     "--file",
-    #     type=str,
-    #     required=True,
-    #     help="Used for ingesting docs"
-    # )
-    # parser.add_argument(
-    #     "--no-reingest",
-    #     dest="reingest",
-    #     action="store_false",
-    #     help="Append data instead of performing a full re-ingestion wipe."
-    # )
-
-    # args = parser.parse_args()
-
     try:
         print("File loading.Extracting text..")
         # retriving text from document

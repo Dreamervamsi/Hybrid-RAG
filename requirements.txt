@@ -4,3 +4,7 @@ argparse                  -> to work on CLI
 chromadb                  -> vector db  
 rank-bm25                 -> for ranking BM25
 fastembed
+langchain-huggingface
+langchain-core
+python-dotenv
+huggingface-hub

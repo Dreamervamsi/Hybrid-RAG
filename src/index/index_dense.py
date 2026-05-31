@@ -1,5 +1,5 @@
 import chromadb
-from . import config
+from src import config
 import os
 
 def get_client():
@@ -32,19 +32,19 @@ def vector_store(chunks:list,embeddings:list,full_reingest:bool=False):
     collection = get_collection(full_reingest)
 
     for chunk in chunks:
-        print(chunk)
-    #     documents.append(chunk['text'])
-    #     ids.append(chunk['chunk_id'])
-    #     metadatas.append(chunk['metadata'])
+        
+        documents.append(chunk['text'])
+        ids.append(chunk['chunk_id'])
+        metadatas.append(chunk['metadata'])
     
-    # collection.upsert(
-    #     documents=documents,
-    #     ids=ids,
-    #     metadatas=metadatas,
-    #     embeddings=embeddings
-    # )
+    collection.upsert(
+        documents=documents,
+        ids=ids,
+        metadatas=metadatas,
+        embeddings=embeddings
+    )
 
-    # return collection
+    return collection
 
 
 def dense_search(query_embedding, top_k) -> list:

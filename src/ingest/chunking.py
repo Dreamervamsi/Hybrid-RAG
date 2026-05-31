@@ -1,5 +1,5 @@
 from langchain_text_splitters import RecursiveCharacterTextSplitter
-from . import config
+from src import config
 import uuid
 
 def chunk_text(results:list) -> list:
