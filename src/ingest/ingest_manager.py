@@ -1,8 +1,8 @@
-from ingest.loaders import file_loader
-from ingest.chunking import chunk_text
-from index.index_dense import vector_store
-from ingest.embeddings import dense_embed
-from index.sparse_index import Tokenize
+from src.ingest.loaders import file_loader
+from src.ingest.chunking import chunk_text
+from src.index.index_dense import vector_store
+from src.ingest.embeddings import dense_embed
+from src.index.sparse_index import Tokenize
 from src import config
 
 def ingest(file_paths:list,reingest:bool=True):

@@ -1,5 +1,5 @@
-from ingest.ingest_manager import ingest
-from retrieve.search_manager import search
+from src.ingest.ingest_manager import ingest
+from src.retrieve.search_manager import search
 from src import config
 import argparse
 

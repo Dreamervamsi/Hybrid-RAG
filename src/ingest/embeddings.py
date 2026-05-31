@@ -1,5 +1,5 @@
 from fastembed import TextEmbedding
-from . import config
+from src import config
 
 # if we put this inside a function, model is created on every function call, which increases latency
 model = TextEmbedding(model_name=config.EMBED_MODEL)

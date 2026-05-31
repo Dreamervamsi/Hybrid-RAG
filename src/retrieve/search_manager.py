@@ -1,9 +1,9 @@
-from index.sparse_index import Tokenize
+from src.index.sparse_index import Tokenize
 from src import config
-from index.index_dense import dense_search
-from ingest.embeddings import model
-from retrieve.rrf_ranking import reciprocal_rank_fusion
-from rag.LLM import generate_rag
+from src.index.index_dense import dense_search
+from src.ingest.embeddings import model
+from src.retrieve.rrf_ranking import reciprocal_rank_fusion
+from src.rag.LLM import generate_rag
 
 def search(user_query:str,top_k:int=config.TOP_K):
     try:
@@ -19,7 +19,9 @@ def search(user_query:str,top_k:int=config.TOP_K):
         
         res = reciprocal_rank_fusion(sparse_results,dense_results)
 
-        generate_rag(query,res)
+        rag_result = generate_rag(query,res)
+
+        print(rag_result)
 
     except FileNotFoundError as e:
         print(f"File not found error:{e}") 
