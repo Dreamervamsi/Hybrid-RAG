@@ -1,4 +1,6 @@
-def reciprocal_rank_fusion(sparse_res:list,dense_res:list,k:int=60):
+from src import config
+
+def reciprocal_rank_fusion(sparse_res:list,dense_res:list,k:int=60,top_k:int=config.TOP_K):
     rrf_scores = {}
     doc_data = {}
 
@@ -28,4 +30,4 @@ def reciprocal_rank_fusion(sparse_res:list,dense_res:list,k:int=60):
         final_match['rrf_score'] = score
         hybrid_results.append(final_match)
     
-    return hybrid_results
+    return hybrid_results[:top_k]

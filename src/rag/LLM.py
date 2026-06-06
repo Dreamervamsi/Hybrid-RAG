@@ -1,7 +1,9 @@
+from functools import lru_cache
 from langchain_huggingface import ChatHuggingFace, HuggingFaceEndpoint
 from langchain_core.messages import HumanMessage
 import os
 from dotenv import load_dotenv
+import json
 
 load_dotenv()
 
@@ -16,10 +18,10 @@ llm = HuggingFaceEndpoint(
 
 chat_model = ChatHuggingFace(llm=llm)
 
-def generate_rag(query:str,top_k_results:list):
-    
+@lru_cache(maxsize=128)
+def _generate_rag_results(query:str,top_results:str):
     context_block=[]
-    for idx,result in enumerate(top_k_results,start=1):
+    for idx,result in enumerate(top_results,start=1):
         block = (
             f"--- Document Source [{idx}] ---\n"
             f"File: {result['metadata']['source']}\n"
@@ -48,11 +50,17 @@ def generate_rag(query:str,top_k_results:list):
 
     response = chat_model.invoke(messages)
     citations = []
-    for idx, result in enumerate(top_k_results, start=1):
+    for idx, result in enumerate(top_results, start=1):
         source_file = result['metadata']['source']
-        chunk_idx = result.get('chunk_idx', 0)
+        chunk_idx = result['metadata']['chunk_idx']
         score = result.get('rrf_score', 0.0)
         
         citations.append(f"[{idx}] Source: {source_file} (Chunk {chunk_idx}) | RRF Score: {score:.4f}")
 
     return response.content,citations
+
+def generate_rag(query:str,top_k_results:list):
+    
+    serialise = json.dump(top_k_results,sort_keys=True)
+
+    return _generate_rag_results(query,serialise)
