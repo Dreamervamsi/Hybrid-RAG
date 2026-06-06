@@ -5,12 +5,13 @@ from src.ingest.embeddings import model
 from src.retrieve.rrf_ranking import reciprocal_rank_fusion
 from src.rag.LLM import generate_rag
 
+tokenizer = Tokenize()
+tokenizer.load_chunks(file_path=config.CHUNK_FILE)
+
 def search(user_query:str,top_k:int=config.TOP_K):
     try:
         query = user_query
         # sparse search
-        tokenizer = Tokenize()
-        tokenizer.load_chunks(file_path=config.CHUNK_FILE)
         sparse_results = tokenizer.sparse_search(query,top_k)
         
         # dense search
