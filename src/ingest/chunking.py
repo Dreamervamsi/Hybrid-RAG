@@ -2,11 +2,12 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 from src import config
 import uuid
 
-def chunk_text(results:list) -> list:
-    text_splitter = RecursiveCharacterTextSplitter(
+text_splitter = RecursiveCharacterTextSplitter(
         chunk_size = config.CHUNK_SIZE,
         chunk_overlap=config.CHUNK_OVERLAP,
-    )
+)
+
+def chunk_text(results:list) -> list:
     text_chunks=[]
     
     for res in results:

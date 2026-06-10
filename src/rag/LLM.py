@@ -18,7 +18,7 @@ llm = HuggingFaceEndpoint(
 
 chat_model = ChatHuggingFace(llm=llm)
 
-@lru_cache(maxsize=128)
+@lru_cache(maxsize=128) # lazy initialising or caching response if sae query passed
 def _generate_rag_results(query:str,top_results:str):
     context_block=[]
     for idx,result in enumerate(top_results,start=1):
