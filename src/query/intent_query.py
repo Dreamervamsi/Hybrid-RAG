@@ -1,6 +1,8 @@
+from src.index.index_dense import get_client,get_collection
 from pickle import NONE
 import ahocorasick
 import re
+from src import config
 
 class IntentCheck:
     def __init__(self):
@@ -45,7 +47,7 @@ class IntentCheck:
                     'word':None,
                     'category':'Data base injection'
                 }
-                
+
         for end_index, (term, category) in self.aho.iter(normalised_query):
             return {
                 'detected':True,
@@ -60,3 +62,10 @@ class IntentCheck:
                 'word':None,
                 'category':None
             }
+
+    def safety_vector_scan(self,normalised_query:str):
+        client = get_client()
+
+        safety_collection = get_collection(full_reingest=False,collection_name=config.SAFETY_BLOCKLIST_COLLECTION)
+
+        

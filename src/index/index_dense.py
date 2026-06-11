@@ -6,11 +6,11 @@ def get_client():
     client = chromadb.PersistentClient(path=os.path.join(config.INDEX_DIR,"chroma"))
     return client 
 
-def get_collection(full_reingest:bool=False):
+def get_collection(full_reingest:bool=False,collection_name:str=config.CHROMADB_COLLECTION):
     client = get_client()
     if full_reingest:
         try:
-            client.delete_collection(name=config.CHROMADB_COLLECTION)
+            client.delete_collection(name=collection_name)
             print(f"Cleared existing collection: {config.INDEX_DIR}")
         except ValueError:
             pass
